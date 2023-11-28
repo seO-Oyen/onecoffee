@@ -4,10 +4,44 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.DBCon;
+import vo.Board;
 
 public class BoardDAO {
+	
+	// 게시판 조회
+	public List<Board> getBoards() {
+		List<Board> boards = new ArrayList<Board>();
+		
+		String sql = "select * from board";
+		
+		try (Connection con = DBCon.con(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			try (ResultSet rs = pstmt.executeQuery();) {
+				// 처리코드2
+				while (rs.next()) {
+					boards.add(new Board(
+							rs.getInt("no"),
+							rs.getString("title"),
+							rs.getString("text"),
+							rs.getDate("firstDate"),
+							rs.getBoolean("isEnd"),
+							rs.getBoolean("isNotice")
+					));
+				}
+				System.out.println("건수:" + boards.size());
+			}
+		} catch (SQLException e) {
+			System.out.println("DB 에러:" + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 에러:" + e.getMessage());
+		}
+		
+		return boards;
+	}
 	
 	// 게시판 글 생성
 	public void createBoard() {

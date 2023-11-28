@@ -19,6 +19,15 @@ public class Board {
 		this.firstDate = firstDate;
 		this.isNotice = isNotice;
 	}
+	
+	public Board(int no, String title, String text, Date firstDate, boolean isEnd, boolean isNotice) {
+		this.no = no;
+		this.title = title;
+		this.text = text;
+		this.firstDate = firstDate;
+		this.isEnd = isEnd;
+		this.isNotice = isNotice;
+	}
 
 	public Board(int no, String title, String text, Date firstDate, Date modifyDate, boolean isEnd, boolean isNotice) {
 		this.no = no;
