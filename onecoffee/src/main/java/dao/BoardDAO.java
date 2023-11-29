@@ -78,5 +78,16 @@ public class BoardDAO {
 			System.out.println("일반에러 : " + e.getMessage());
 		}
 	}
+	
+	// 처리 완료
+	public Board updateIsEnd(int boardNum) {
+		Board board = new Board();
+		
+		return board;
+	}
+	
+	// 게시판 수정
+	
+	// 게시판 삭제
 
 }
