@@ -7,19 +7,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의 게시판</title>
+<title>게시글 등록</title>
 <script src="jquery-3.1.1.js"></script>
 <script>
-	function writeBoard() {
-		location.href='boardWrite.jsp'
-	}
+	
 </script>
 </head>
 <body>
 	<%
 	BoardDAO boardDao = new BoardDAO();
 	
-	List<Board> boards = boardDao.getBoards();
+	String title = request.getParameter("title");
+	String text = request.getParameter("text");
+	
+	if(title != null && text != null) {
+		boardDao.createBoard(title, text, 2);
+	}
+	
 	%>
 	<!-- 메뉴바 -->
 	<div>
@@ -34,37 +38,14 @@
 				<button class="btn btn-info" type="submit">Search</button>
 			</nav>
 		</form> -->
-		<input type="button" onclick="writeBoard()" value="게시글 등록">
-		<table class="table table-hover table-striped">
-			<col width="10%">
-			<col width="50%">
-			<col width="15%">
-			<col width="15%">
-			<col width="10%">
-			<thead>
-
-				<tr class="table-success text-center">
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>처리 여부</th>
-				</tr>
-			</thead>
-			<tbody>
-			<%
-			for (Board board : boards) {
-			%>
-				<tr style="text-align:center;">
-					<td><%= board.getNo() %></td>
-					<td><%= board.getTitle() %></td>
-					<td>작성자</td>
-					<td><%= board.getFirstDate() %></td>
-					<td><%= board.isEnd() ? "처리완료" : "처리 전" %></td>
-				</tr>
-			<% } %>
-			</tbody>
-		</table>
+		<form>
+			<input name="title" type="text" placeholder="제목을 입력하세요">
+			<div>
+			<textarea name="text" cols="50" lows="10" placeholder="내용"></textarea>
+			</div>
+			<input type="submit" value="등록" />
+			<input type="button" value="게시판 목록" />
+		</form>
 
 	</div>
 </body>
