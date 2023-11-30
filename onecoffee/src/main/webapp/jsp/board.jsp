@@ -13,6 +13,10 @@
 	function writeBoard() {
 		location.href='boardWrite.jsp'
 	}
+	
+	function boardDetail(boardNum) {
+		location.href = 'readBoard.jsp?boardNum=' + boardNum
+	}
 </script>
 </head>
 <body>
@@ -27,13 +31,6 @@
 		<span>커뮤니티</span>
 	</div>
 	<div class="container">
-		<!-- <form id="frm01" class="form-inline" method="post">
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-				<input class="form-control mr-sm-2" placeholder="제목" /> <input
-					class="form-control mr-sm-2" placeholder="내용" />
-				<button class="btn btn-info" type="submit">Search</button>
-			</nav>
-		</form> -->
 		<input type="button" onclick="writeBoard()" value="게시글 등록">
 		<table class="table table-hover table-striped">
 			<col width="10%">
@@ -55,7 +52,7 @@
 			<%
 			for (Board board : boards) {
 			%>
-				<tr style="text-align:center;">
+				<tr style="text-align:center;" onclick="boardDetail(<%=board.getNo()%>)">
 					<td><%= board.getNo() %></td>
 					<td><%= board.getTitle() %></td>
 					<td>작성자</td>

@@ -10,7 +10,9 @@
 <title>게시글 등록</title>
 <script src="jquery-3.1.1.js"></script>
 <script>
-	
+function goMain() {
+	location.href = 'board.jsp'
+}
 </script>
 </head>
 <body>
@@ -22,6 +24,11 @@
 	
 	if(title != null && text != null) {
 		boardDao.createBoard(title, text, 2);
+		%>
+		<script>
+			location.href = 'board.jsp'
+		</script>
+		<%
 	}
 	
 	%>
@@ -44,7 +51,7 @@
 			<textarea name="text" cols="50" lows="10" placeholder="내용"></textarea>
 			</div>
 			<input type="submit" value="등록" />
-			<input type="button" value="게시판 목록" />
+			<input type="button" onclick="goMain()" value="게시판 목록" />
 		</form>
 
 	</div>

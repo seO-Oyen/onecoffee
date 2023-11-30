@@ -12,7 +12,7 @@ import vo.Board;
 
 public class BoardDAO {
 
-	// 게시판 조회
+	// 게시판 리스트 조회
 	public List<Board> getBoards() {
 		List<Board> boards = new ArrayList<Board>();
 
@@ -35,6 +35,30 @@ public class BoardDAO {
 		}
 
 		return boards;
+	}
+	
+	// 게시판 조회
+	public Board getBoard(int boardNum) {
+		Board board = null;
+		String sql = "select * from board where no = ?";
+		
+		try (Connection con = DBCon.con(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, boardNum);
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				// 처리코드2
+				if (rs.next()) {
+					board = new Board(rs.getInt("no"), rs.getString("title"), rs.getString("text"),
+							rs.getDate("firstDate"), rs.getBoolean("isEnd"), rs.getBoolean("isNotice"));
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("DB 에러:" + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 에러:" + e.getMessage());
+		}
+		
+		return board;
 	}
 
 	// 게시판 글 생성
@@ -77,6 +101,32 @@ public class BoardDAO {
 		} catch (Exception e) {
 			System.out.println("일반에러 : " + e.getMessage());
 		}
+	}
+	
+	// 처리완료
+	public void updateIsEnd(int boardNum) {
+		String sql = "UPDATE board SET ISEND = 1 WHERE NO = ?";
+		
+		try (Connection con = DBCon.con(); PreparedStatement 
+		pstmt = con.prepareStatement(sql);) {
+			con.setAutoCommit(false);
+			// 처리코드1
+			pstmt.setInt(1, boardNum);
+			int uptCnt = pstmt.executeUpdate();
+			if (uptCnt == 0) {
+				System.out.println("CUD 실패");
+				System.out.println();
+				con.rollback();
+			} else {
+				con.commit(); // Commit the transaction
+				System.out.println("CUD 성공");
+			}
+		} catch (SQLException e) {
+			System.out.println("DB 에러:" + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 에러:" + e.getMessage());
+		}
+		
 	}
 
 }
