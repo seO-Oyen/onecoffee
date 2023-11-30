@@ -13,9 +13,9 @@ public class Board {
 	private boolean isNotice;
 	
 	public Board() {
-		
+
 	}
-	
+
 	public Board(String title, String text, Date firstDate, boolean isNotice) {
 		this.title = title;
 		this.text = text;

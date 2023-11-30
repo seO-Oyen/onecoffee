@@ -128,5 +128,9 @@ public class BoardDAO {
 		}
 		
 	}
+	
+	// 게시판 수정
+	
+	// 게시판 삭제
 
 }

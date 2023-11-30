@@ -22,8 +22,11 @@
 <body>
 	<%
 	BoardDAO boardDao = new BoardDAO();
+	String userNumStr = request.getParameter("userNum");
+	int userNum = Integer.parseInt(userNumStr);
 	
 	List<Board> boards = boardDao.getBoards();
+	
 	%>
 	<!-- 메뉴바 -->
 	<div>
