@@ -13,6 +13,10 @@
 	function goMain() {
 		location.href = 'board.jsp'
 	}
+	
+	function modifyBoard() {
+		location.href = 'modifyBoard.jsp'
+	}
 </script>
 </head>
 <body>
@@ -37,7 +41,7 @@
 	<% } else {
 		int boardNum = Integer.parseInt(boardNumStr);
 		Board board = boardDao.getBoard(boardNum);
-	
+		
 	%>
 	<script>
 		function updateRe() {
@@ -59,12 +63,13 @@
 		</form> -->
 			<div><%= board.getNo() %></div>
 			<div><%= board.getTitle() %></div>
-			<div>작성자</div>
+			<div><%= board.getMember().getName() %></div>
 			<div><%= board.getText() %></td>
 			<div><%= board.getFirstDate() %></td>
 			<div><%= board.isEnd() ? "처리완료" : "처리 전" %></div>
 	<% } %>
 	</div>
+	<input type="button" onclick="modifyBoard()" value="게시글 수정" >
 	<input type="button" onclick="goMain()" value="게시판 리스트로" >
 	<br>
 	<!-- <form>

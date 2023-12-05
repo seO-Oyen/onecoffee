@@ -22,8 +22,9 @@
 <body>
 	<%
 	BoardDAO boardDao = new BoardDAO();
-	String userNumStr = request.getParameter("userNum");
-	int userNum = Integer.parseInt(userNumStr);
+	// TODO : 로그인이랑 연결
+	//String userNumStr = request.getParameter("userNum");
+	//int userNum = Integer.parseInt(userNumStr);
 	
 	List<Board> boards = boardDao.getBoards();
 	
@@ -58,7 +59,7 @@
 				<tr style="text-align:center;" onclick="boardDetail(<%=board.getNo()%>)">
 					<td><%= board.getNo() %></td>
 					<td><%= board.getTitle() %></td>
-					<td>작성자</td>
+					<td><%= board.getMember().getName() %></td>
 					<td><%= board.getFirstDate() %></td>
 					<td><%= board.isEnd() ? "처리완료" : "처리 전" %></td>
 				</tr>

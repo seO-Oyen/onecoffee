@@ -2,11 +2,13 @@ package vo;
 
 import java.util.Date;
 
+import order_sol.Member;
+
 public class Board {
 	private int no;
 	private String title;
 	private String text;
-	// 유저
+	private Member member;
 	private Date firstDate;
 	private Date modifyDate;
 	private boolean isEnd;
@@ -36,6 +38,18 @@ public class Board {
 		this.no = no;
 		this.title = title;
 		this.text = text;
+		this.firstDate = firstDate;
+		this.modifyDate = modifyDate;
+		this.isEnd = isEnd;
+		this.isNotice = isNotice;
+	}
+
+	public Board(int no, String title, String text, Member member, Date firstDate, boolean isEnd,
+			boolean isNotice) {
+		this.no = no;
+		this.title = title;
+		this.text = text;
+		this.member = member;
 		this.firstDate = firstDate;
 		this.modifyDate = modifyDate;
 		this.isEnd = isEnd;
@@ -85,7 +99,11 @@ public class Board {
 	public void setNotice(boolean isNotice) {
 		this.isNotice = isNotice;
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	
-	
-
 }
